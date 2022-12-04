@@ -1,6 +1,18 @@
 lua require('core.init')
 
+"https://stackoverflow.com/questions/11489428/how-to-make-vim-paste-from-and-copy-to-systems-clipboard
+
 set clipboard^=unnamed,unnamedplus
+set paste               " Paste from a windows or from vim
+set go+=a               " Visual selection automatically copied to the clipboard
+
+" Copy and paste
+if has('clipboard') && !has('gui_running')
+  vnoremap <C-c> "+y
+  vnoremap <C-x> "+d
+  vnoremap <C-v> "+p
+  inoremap <C-v> <C-r><C-o>+
+endif
 
 if has('unix')
 	set thesaurus+=/usr/share/dict/words
